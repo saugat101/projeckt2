@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'core',
     'corsheaders',
     'core1',
+    'core2',
 ]
 
 MIDDLEWARE = [

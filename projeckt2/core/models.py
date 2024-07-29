@@ -5,7 +5,7 @@ from django.conf import settings
 
 class CustomUserManager(BaseUserManager):
 
-    # profile_picture = models.ImageField(upload_to='profile_pictures/', default='profile_pictures/default.jpg')
+
     def create_user(self, email, username, first_name, last_name, password=None, **extra_fields):
         if not email:
             raise ValueError(_('The Email field must be set'))
@@ -57,6 +57,8 @@ class Movie(models.Model):
     genres = models.CharField(max_length=255, blank=True, null=True)
     keywords = models.CharField(max_length=255, blank=True, null=True)
     tagline = models.CharField(max_length=255, blank=True, null=True)
+    avg_rating=models.FloatField(default=0.0, blank=True)
+    vote_count=models.BigIntegerField(default=0, blank=True)
     credits = models.TextField(null=True, blank=True)
     director = models.CharField(max_length=255, blank=True, null=True)
     release_date = models.DateField(blank=True, null=True)
@@ -70,30 +72,3 @@ class Movie(models.Model):
 
     def __str__(self):
         return self.title
-
-# class Rating(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-#     rating = models.IntegerField()
-
-    # class Meta:
-    #         constraints = [
-    #         models.UniqueConstraint(fields=['user', 'movie'], name='unique_user_rating')
-    #     ]
-
-    # def __str__(self):
-    #     return f"{self.user} rated {self.movie}: {self.rating}"
-
-
-# class Review(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-#     review = models.TextField()
-
-#     class Meta:
-#             constraints = [
-#             models.UniqueConstraint(fields=['user', 'movie'], name='unique_user_review')
-        # ]
-
-    # def __str__(self):
-    #     return f"Review by {self.user} on {self.movie}"

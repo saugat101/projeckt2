@@ -21,6 +21,14 @@ class RatingSerializer(serializers.ModelSerializer):
             defaults={'rating': validated_data['rating']}
         )
         return rating
+    
+    def update_movie_avg_rating(self, movie):
+        rating = Rating.objects.filter(movie=movie)
+        avg_rating = rating.aggregate(models.Avg('rating'))['rating__avg']
+        vote_count = rating.count()
+        movie.avg_rating = avg_rating
+        movie.vote_count = vote_count
+        movie.save()
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:

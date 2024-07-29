@@ -10,12 +10,6 @@ class Rating(models.Model):
     class Meta:
         unique_together = ('user', 'movie')
 
-
-    # class Meta:
-    #     constraints = [
-    #         models.UniqueConstraint(fields=['user', 'movie'], name='unique_user_movie_rating')
-    #     ]
-
     def __str__(self):
         return f"{self.user} rated {self.movie}: {self.rating}"
     
@@ -27,11 +21,6 @@ class Review(models.Model):
     class Meta:
         unique_together = ('user', 'movie')
 
-
-    # class Meta:
-    #     constraints = [
-    #         models.UniqueConstraint(fields=['user', 'movie'], name='unique_user_movie_review')
-    #     ]
 
     def __str__(self):
         return f"{self.user} reviewed {self.movie}"

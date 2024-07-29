@@ -23,8 +23,8 @@ from rest_framework.pagination import PageNumberPagination
 import pickle
 
 
-with open('models/movies.pkl', 'rb') as f:
-     models= pickle.load(f)
+# with open('models/movies.pkl', 'rb') as f:
+#      models= pickle.load(f)
 class SignupView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -75,7 +75,7 @@ class TopMoviesList(generics.ListAPIView):
 def search_movies(request):
     query = request.GET.get('query', '')
     if query:
-        model_output=models.recommend(query)
+        # model_output=models.recommend(query)
         movies = Movie.objects.filter(title=query)
     else:
         movies = Movie.objects.none()
